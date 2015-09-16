@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Anmeldung</string>
+    <string name="hello_world">Hallo Welt</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="action_add_registration">Neue Anmeldung</string>
+    <string name="save_file_not_found_toast">Keine Speicherdaten gefunden.</string>
+    <string name="title_activity_add_registration">Neue Anmeldung</string>
+    <string name="add_registration_name">Familienname</string>
+    <string name="add_registration_first_name">Vorname</string>
+    <string name="add_registration_label_date_of_birth">Geburtsdatum</string>
+    <string name="button_save">Speichern</string>
+    <string name="button_subjects">Fächer</string>
+    <string name="title_activity_birth_date_picker">Geburtsdatum wählen</string>
+    <string name="grade_a">Sehr Gut</string>
+    <string name="grade_b">Gut</string>
+    <string name="grade_c">Befriedigend</string>
+    <string name="grade_d">Ausreichend</string>
+    <string name="grade_e">Mangelhaft</string>
+    <string name="grade_f">Ungenügend</string>
+    <string name="label_subjects">Fächer/Kurse</string>
+    <string name="add_subjects_description">Fach oder Kurs hinzufügen</string>
+    <string name="title_activity_edit_subject">Fach hinzufügen/bearbeiten</string>
+    <string name="hint_edit_subject_name">Fach/Kurs</string>
+    <string name="default_subject_name">Leer</string>
+</resources>

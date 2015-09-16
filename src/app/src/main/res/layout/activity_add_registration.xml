@@ -1,0 +1,70 @@
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="de.thenutheads.jlndbe.enrolmentapp.EditStudentActivity"
+
+    android:orientation="vertical"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentStart="true"
+    android:weightSum="1"
+    android:id="@+id/add_registration_root">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editName"
+        android:hint="@string/add_registration_name" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editFirstName"
+        android:hint="@string/add_registration_first_name" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editDateOfBirth"
+        android:hint="@string/add_registration_label_date_of_birth"
+        android:enabled="true"
+        android:inputType="none" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:id="@+id/subjectHeaderLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/label_subjects"
+            android:id="@+id/subjectLabel"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@android:drawable/ic_input_add"
+            android:id="@+id/btn_addSubject"
+            android:clickable="true"
+            android:layout_centerVertical="true"
+            android:nestedScrollingEnabled="true"
+            android:onClick="onClickAddSubject" />
+    </RelativeLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:id="@+id/sListView"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
