@@ -15,6 +15,32 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+/**
+ * Created by Steven Wobser on 08.09.2015
+ * <p/>
+ * <p/>
+ * The MIT License (MIT)
+ * <p/>
+ * Copyright (c) 2015 Steven Wobser
+ * <p/>
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * <p/>
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * <p/>
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 public class DashboardActivity extends Activity {
 
     public static final int ADD_STUDENT_REQUEST = 0x539;
@@ -29,10 +55,10 @@ public class DashboardActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(de.thenutheads.jlndbe.schoolregistration.R.layout.activity_dashboard);
+        setContentView(de.thenutheads.jlndbe.enrolmentapp.R.layout.activity_dashboard);
 
         _context = getApplicationContext();
-        _saveFile = "schoolRegistrations.dat";
+        _saveFile = "enrolmentapps.dat";
 
         loadStudentList();
 
@@ -41,7 +67,7 @@ public class DashboardActivity extends Activity {
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         saveStudentList();
         super.onDestroy();
     }
@@ -49,7 +75,7 @@ public class DashboardActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(de.thenutheads.jlndbe.schoolregistration.R.menu.menu_dashboard, menu);
+        getMenuInflater().inflate(de.thenutheads.jlndbe.enrolmentapp.R.menu.menu_dashboard, menu);
         return true;
     }
 
@@ -58,10 +84,10 @@ public class DashboardActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        switch (item.getItemId()){
-            case de.thenutheads.jlndbe.schoolregistration.R.id.action_settings:
+        switch (item.getItemId()) {
+            case de.thenutheads.jlndbe.enrolmentapp.R.id.action_settings:
                 return true;
-            case de.thenutheads.jlndbe.schoolregistration.R.id.action_new_registration:
+            case de.thenutheads.jlndbe.enrolmentapp.R.id.action_new_registration:
                 startActivityForResult(new Intent(this, EditStudentActivity.class), ADD_STUDENT_REQUEST);
             default:
                 return super.onOptionsItemSelected(item);
@@ -69,13 +95,13 @@ public class DashboardActivity extends Activity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode){
+        switch (requestCode) {
             case ADD_STUDENT_REQUEST:
-                switch (requestCode){
+                switch (requestCode) {
                     case RESULT_OK:
-                        if(data != null){
+                        if (data != null) {
 
                         }
                         return;
@@ -87,7 +113,7 @@ public class DashboardActivity extends Activity {
         }
     }
 
-    private void loadStudentList(){
+    private void loadStudentList() {
         FileInputStream fileIn;
         ObjectInputStream objectIn;
 
@@ -98,20 +124,20 @@ public class DashboardActivity extends Activity {
 
             _students = (ArrayList<Student>) objectIn.readObject();
 
-        } catch (FileNotFoundException e){
-            Toast.makeText(_context, de.thenutheads.jlndbe.schoolregistration.R.string.save_file_not_found_toast, Toast.LENGTH_SHORT).show();
+        } catch (FileNotFoundException e) {
+            Toast.makeText(_context, de.thenutheads.jlndbe.enrolmentapp.R.string.save_file_not_found_toast, Toast.LENGTH_SHORT).show();
             e.printStackTrace();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static ArrayList<Student> getStudentArrayList(){
+    public static ArrayList<Student> getStudentArrayList() {
         return _students;
     }
 
-    private void saveStudentList(){
-        if(_students == null || _students.isEmpty()) return;
+    private void saveStudentList() {
+        if (_students == null || _students.isEmpty()) return;
 
         FileOutputStream fileOut;
         ObjectOutputStream objectOut;
@@ -124,8 +150,8 @@ public class DashboardActivity extends Activity {
             objectOut.close();
             fileOut.close();
 
-        } catch (Exception e){
-            Toast.makeText(_context, de.thenutheads.jlndbe.schoolregistration.R.string.save_failed_toast, Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(_context, de.thenutheads.jlndbe.enrolmentapp.R.string.save_failed_toast, Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }

@@ -6,7 +6,7 @@
     android:paddingRight="0dp"
     android:paddingTop="0dp"
     android:paddingBottom="0dp"
-    tools:context="de.thenutheads.jlndbe.schoolregistration.BirthDatePickerActivity">
+    tools:context="de.thenutheads.jlndbe.enrolmentapp.BirthDatePickerActivity">
 
     <DatePicker
         android:layout_width="fill_parent"
