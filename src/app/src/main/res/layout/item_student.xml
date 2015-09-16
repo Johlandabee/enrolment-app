@@ -8,7 +8,8 @@
         android:id="@+id/studentIcon"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@android:drawable/sym_def_app_icon" />
+        android:src="@android:drawable/sym_def_app_icon"
+        android:contentDescription="@string/student_icon_description" />
 
     <TextView
         android:id="@+id/studentFullName"
@@ -29,7 +30,7 @@
     android:layout_height="wrap_content"
     android:layout_toRightOf="@+id/studentIcon"
     android:textAppearance="?android:attr/textAppearanceSmall"
-    android:layout_marginTop="23dp"
+    android:layout_marginTop="30dp"
     android:layout_marginLeft="11dp" />
 
     <TextView
@@ -48,7 +49,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@android:drawable/ic_menu_edit"
-        android:onClick="onClickEditSubject" />
+        android:contentDescription="@string/student_edit_icon_description" />
 
     <ImageView
         android:id="@+id/studentIconDelete"
@@ -57,6 +58,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@android:drawable/ic_menu_delete"
-        android:onClick="onClickRemoveSubject" />
+        android:onClick="onClickRemoveStudent"
+        android:contentDescription="@string/student_delete_icon_description" />
 
 </RelativeLayout>

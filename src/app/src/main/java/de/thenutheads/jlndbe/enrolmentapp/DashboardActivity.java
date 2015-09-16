@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.FileInputStream;
@@ -43,13 +45,14 @@ import java.util.ArrayList;
  */
 public class DashboardActivity extends Activity {
 
-    public static final int ADD_STUDENT_REQUEST = 0x539;
+    public static final int ADD_STUDENT_REQUEST = 0x2A,
+            EDIT_STUDENT_REQUEST = 0x2B;
 
-    private static ArrayList<Student> _students;
+    public static final String SAVE_FILE = "enrolments.json",
+            PARCELABLE_STUDENT_OBJECT = "obj_parcelable_student";
 
-    private String _saveFile;
     private Context _context;
-
+    private ArrayList<Student> _students;
     private StudentAdapter _studentAdapter;
 
     @Override
@@ -57,12 +60,12 @@ public class DashboardActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(de.thenutheads.jlndbe.enrolmentapp.R.layout.activity_dashboard);
 
-        _context = getApplicationContext();
-        _saveFile = "enrolmentapps.dat";
+        _context = DashboardActivity.this;
 
         loadStudentList();
 
         _studentAdapter = new StudentAdapter(this, new ArrayList<Student>());
+        ((ListView) findViewById(R.id.studentListView)).setAdapter(_studentAdapter);
 
     }
 
@@ -97,62 +100,73 @@ public class DashboardActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         switch (requestCode) {
             case ADD_STUDENT_REQUEST:
-                switch (requestCode) {
-                    case RESULT_OK:
-                        if (data != null) {
-
-                        }
-                        return;
-                    case RESULT_CANCELED:
-                        return;
-                }
+                if (resultCode == RESULT_OK && data != null)
+                    addStudentToList((Student) data.getParcelableExtra(PARCELABLE_STUDENT_OBJECT));
+                break;
             default:
-                return;
+                break;
         }
+    }
+
+    public void onClickRemoveStudent(View v) {
+        View parent = (View) v.getParent();
+        _studentAdapter.remove(_studentAdapter.getItem(((ListView) parent.getParent())
+                .getPositionForView(parent)));
+    }
+
+    public void onClickEditStudent(View v) {
+        // TODO:
+    }
+
+    private void addStudentToList(Student student) {
+        _studentAdapter.add(student);
     }
 
     private void loadStudentList() {
-        FileInputStream fileIn;
-        ObjectInputStream objectIn;
+        // TODO: JSON-Serializer
+        /**
+         FileInputStream fileIn;
+         ObjectInputStream objectIn;
 
-        try {
+         try {
 
-            fileIn = _context.openFileInput(_saveFile);
-            objectIn = new ObjectInputStream(fileIn);
+         fileIn = _context.openFileInput(SAVE_FILE);
+         objectIn = new ObjectInputStream(fileIn);
 
-            _students = (ArrayList<Student>) objectIn.readObject();
+         _students = (ArrayList<Student>) objectIn.readObject();
 
-        } catch (FileNotFoundException e) {
-            Toast.makeText(_context, de.thenutheads.jlndbe.enrolmentapp.R.string.save_file_not_found_toast, Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static ArrayList<Student> getStudentArrayList() {
-        return _students;
+         } catch (FileNotFoundException e) {
+         Toast.makeText(_context, de.thenutheads.jlndbe.enrolmentapp.R.string.toast_save_file_not_found, Toast.LENGTH_SHORT).show();
+         e.printStackTrace();
+         } catch (Exception e) {
+         e.printStackTrace();
+         }
+         **/
     }
 
     private void saveStudentList() {
-        if (_students == null || _students.isEmpty()) return;
+        /** TODO: JSON-Serializer **/
+        /**
+         if (_students == null || _students.isEmpty()) return;
 
-        FileOutputStream fileOut;
-        ObjectOutputStream objectOut;
+         FileOutputStream fileOut;
+         ObjectOutputStream objectOut;
 
-        try {
+         try {
 
-            fileOut = _context.openFileOutput(_saveFile, Context.MODE_PRIVATE);
-            objectOut = new ObjectOutputStream(fileOut);
-            objectOut.writeObject(_students);
-            objectOut.close();
-            fileOut.close();
+         fileOut = _context.openFileOutput(SAVE_FILE, Context.MODE_PRIVATE);
+         objectOut = new ObjectOutputStream(fileOut);
+         objectOut.writeObject(_students);
+         objectOut.close();
+         fileOut.close();
 
-        } catch (Exception e) {
-            Toast.makeText(_context, de.thenutheads.jlndbe.enrolmentapp.R.string.save_failed_toast, Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
+         } catch (Exception e) {
+         Toast.makeText(_context, de.thenutheads.jlndbe.enrolmentapp.R.string.toast_save_failed, Toast.LENGTH_SHORT).show();
+         e.printStackTrace();
+         }
+         */
     }
 }

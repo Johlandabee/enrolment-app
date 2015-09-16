@@ -7,7 +7,7 @@
         android:showAsAction="never" />
     <item
         android:id="@+id/action_new_registration"
-        android:title="@string/action_add_registration"
+        android:title="@string/action_add_student"
         android:orderInCategory="100" android:showAsAction="ifRoom"
         android:icon="@android:drawable/ic_input_add"/>
 </menu>

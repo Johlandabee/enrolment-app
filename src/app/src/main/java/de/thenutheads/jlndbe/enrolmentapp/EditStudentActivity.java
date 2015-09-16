@@ -2,6 +2,7 @@ package de.thenutheads.jlndbe.enrolmentapp;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -45,9 +46,12 @@ import java.util.Locale;
 public class EditStudentActivity extends Activity {
 
     private EditText _dobEdit, _nameEdit, _firstNameEdit;
+
+    private Calendar _dob;
     private DatePickerDialog _dobDialog;
     private SimpleDateFormat _dobFormat;
 
+    private ArrayList<Subject> _subjects;
     private SubjectAdapter _subjectAdapter;
 
 
@@ -61,7 +65,9 @@ public class EditStudentActivity extends Activity {
         _nameEdit = (EditText) findViewById(de.thenutheads.jlndbe.enrolmentapp.R.id.editName);
         _firstNameEdit = (EditText) findViewById(de.thenutheads.jlndbe.enrolmentapp.R.id.editFirstName);
 
-        _subjectAdapter = new SubjectAdapter(this, new ArrayList<Subject>());
+        _subjects = new ArrayList<>();
+
+        _subjectAdapter = new SubjectAdapter(this, _subjects);
         ((ListView) findViewById(de.thenutheads.jlndbe.enrolmentapp.R.id.sListView)).setAdapter(_subjectAdapter);
 
     }
@@ -90,15 +96,15 @@ public class EditStudentActivity extends Activity {
 
     private void setDobDialog() {
         Calendar dobCalendar = Calendar.getInstance();
-        _dobFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        _dobFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
         _dobEdit = (EditText) findViewById(de.thenutheads.jlndbe.enrolmentapp.R.id.editDateOfBirth);
 
         _dobDialog = new DatePickerDialog(EditStudentActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar date = Calendar.getInstance();
-                date.set(year, monthOfYear, dayOfMonth);
-                _dobEdit.setText(_dobFormat.format(date.getTime()));
+                _dob = Calendar.getInstance();
+                _dob.set(year, monthOfYear, dayOfMonth);
+                _dobEdit.setText(_dobFormat.format(_dob.getTime()));
             }
         }, dobCalendar.get(Calendar.YEAR), dobCalendar.get(Calendar.MONTH), dobCalendar.get(Calendar.DAY_OF_MONTH));
 
@@ -111,16 +117,22 @@ public class EditStudentActivity extends Activity {
     }
 
     public void onClickEditSubject(View v) {
-
+        // TODO: Alert dialog...
     }
 
     public void validateForm() {
         if (_dobEdit.getText().toString().matches("") || _nameEdit.getText().toString().matches("") ||
-                _firstNameEdit.getText().toString().matches("") || _subjectAdapter.getCount() == 0) {
+                _firstNameEdit.getText().toString().matches("") || _subjectAdapter.getCount() == 0 || _dob == null) {
 
-            Toast.makeText(EditStudentActivity.this, de.thenutheads.jlndbe.enrolmentapp.R.string.add_student_not_valid_toast, Toast.LENGTH_LONG).show();
+            Toast.makeText(EditStudentActivity.this, de.thenutheads.jlndbe.enrolmentapp.R.string.toast_add_student_not_valid, Toast.LENGTH_LONG).show();
             return;
         }
+
+        Intent intent = new Intent();
+        intent.putExtra(DashboardActivity.PARCELABLE_STUDENT_OBJECT, new Student(_nameEdit.getText().toString(),
+                _firstNameEdit.getText().toString(), _dob, _subjects));
+
+        setResult(RESULT_OK, intent);
 
         finish();
     }

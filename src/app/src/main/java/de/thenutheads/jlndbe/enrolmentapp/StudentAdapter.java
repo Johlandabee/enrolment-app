@@ -49,9 +49,12 @@ public class StudentAdapter extends ArrayAdapter<Student> {
             convertView = LayoutInflater.from(getContext()).inflate(de.thenutheads.jlndbe.enrolmentapp.R.layout.item_student, parent, false);
         }
 
-        ((TextView) convertView.findViewById(de.thenutheads.jlndbe.enrolmentapp.R.id.studentFullName)).setText(String.format("%d, %d", student.getName(), student.getFirstName()));
-        ((TextView) convertView.findViewById(de.thenutheads.jlndbe.enrolmentapp.R.id.studentAge)).setText(String.format("%d: %d", de.thenutheads.jlndbe.enrolmentapp.R.string.label_age, student.getAge()));
-        ((TextView) convertView.findViewById(de.thenutheads.jlndbe.enrolmentapp.R.id.studentAverage)).setText(String.format("%d: %d", de.thenutheads.jlndbe.enrolmentapp.R.string.label_average, student.getAverage()));
+        ((TextView) convertView.findViewById(de.thenutheads.jlndbe.enrolmentapp.R.id.studentFullName))
+                .setText(String.format("%s, %s", student.getName(), student.getFirstName()));
+        ((TextView) convertView.findViewById(de.thenutheads.jlndbe.enrolmentapp.R.id.studentAge))
+                .setText(String.format("%s: %d", App.getContext().getString(R.string.label_age), student.getAge()));
+        ((TextView) convertView.findViewById(de.thenutheads.jlndbe.enrolmentapp.R.id.studentAverage))
+                .setText(String.format("%s: %.2f", App.getContext().getString(R.string.label_average), student.getAverage()));
 
         return convertView;
     }

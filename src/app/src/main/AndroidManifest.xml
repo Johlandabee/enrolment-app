@@ -19,7 +19,7 @@
         </activity>
         <activity
             android:name=".EditStudentActivity"
-            android:label="@string/title_activity_add_registration" >
+            android:label="@string/title_activity_add_enrolment" >
         </activity>
         <activity
             android:name=".EditSubjectActivity"

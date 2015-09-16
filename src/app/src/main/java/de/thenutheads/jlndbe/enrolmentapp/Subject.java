@@ -1,6 +1,8 @@
 package de.thenutheads.jlndbe.enrolmentapp;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Created by Steven Wobser on 08.09.2015
@@ -28,25 +30,15 @@ import android.content.Context;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-public class Subject {
+public class Subject implements Parcelable {
 
     enum Grade {
-        A(1),
-        B(2),
-        C(3),
-        D(4),
-        E(5),
-        F(6);
-
-        private int _numeric;
-
-        Grade(int numeric) {
-            _numeric = numeric;
-        }
-
-        public int toInteger() {
-            return _numeric;
-        }
+        A,
+        B,
+        C,
+        D,
+        E,
+        F;
 
         @Override
         public String toString() {
@@ -56,6 +48,31 @@ public class Subject {
 
     private String _name;
     private Grade _grade;
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeString(_name);
+        out.writeInt(_grade.ordinal());
+    }
+
+    public static final Parcelable.Creator<Subject> CREATOR
+            = new Parcelable.Creator<Subject>() {
+        public Subject createFromParcel(Parcel in) {
+            return new Subject(in);
+        }
+
+        public Subject[] newArray(int size) {
+            return new Subject[size];
+        }
+    };
+
+    private Subject(Parcel in) {
+        _name = in.readString();
+        _grade = Grade.values()[in.readInt()];
+    }
 
     public Subject(String name, Grade grade) {
         _name = name;
@@ -72,11 +89,6 @@ public class Subject {
 
     public void setGrade(Grade grade) {
         _grade = grade;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%d: %d", _name, _grade);
     }
 
     public static String LocalizeGrade(Grade grade, Context context) {

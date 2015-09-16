@@ -19,19 +19,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editName"
-        android:hint="@string/add_registration_name" />
+        android:hint="@string/add_enrolment_name" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editFirstName"
-        android:hint="@string/add_registration_first_name" />
+        android:hint="@string/add_enrolment_first_name" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editDateOfBirth"
-        android:hint="@string/add_registration_label_date_of_birth"
+        android:hint="@string/add_enrolment_label_date_of_birth"
         android:enabled="true"
         android:inputType="none" />
 

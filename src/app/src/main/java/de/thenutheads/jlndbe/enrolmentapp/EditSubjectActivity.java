@@ -33,6 +33,8 @@ import android.widget.Spinner;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+/** Obsolete -> TODO: Replace this by alert dialog
 public class EditSubjectActivity extends Activity {
 
     @Override
@@ -69,3 +71,4 @@ public class EditSubjectActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 }
+**/
